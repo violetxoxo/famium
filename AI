@@ -1,0 +1,25 @@
+import { useState } from 'react';
+
+export default function MyComponent() {
+  const [prompt, setPrompt] = useState("What is the meaning of life?");
+  const [response, setResponse] = useState("");
+  const handleChange = (e) => {
+    setPrompt(e.target.value);
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setResponse(await generateResponse(prompt));
+  }
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Prompt:
+          <input type="text" value={prompt} onChange={handleChange} />
+        </label>
+        <button type="submit">Generate response</button>
+      </form>
+      <p>Response: {response}</p>
+    </div>
+  );
+}
